@@ -3,7 +3,7 @@
  * @Date: 2017/2/23 13:06
  * @Author: Mr.m
  */
- public ResponseEntity<Void> insertArticleComment(String comCont,String articleId) throws IOException {
+ public ResponseEntity<Void> sendForm(String comCont,String articleId) throws IOException {
         try {
             //使用表单
             List<BasicNameValuePair> formData = new ArrayList<BasicNameValuePair>();
@@ -43,7 +43,7 @@ public Class User{
  */
  @RequestMapping(method = RequestMethod.POST)
  //直接使用实体类接受
-public ResponseEntity<Void> insertComment(User user, HttpServletRequest request){
+public ResponseEntity<Void> receiveForm(User user, HttpServletRequest request){
     try {
         //使用request接受
         String username = request.getParameter("username");
