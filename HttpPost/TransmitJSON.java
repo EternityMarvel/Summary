@@ -20,6 +20,12 @@ public ResponseEntity<Void> sendJSON() throws IOException {
                      .append(",\"password\":\"").append(password).append("\"}");
         StringEntity entity = new StringEntity(URLEncoder.encode(stringBuilder.toString(),"UTF-8"));
         
+        //或者使用JSONObject创建
+        //JSONObject jsonParam = new JSONObject();  
+        //jsonParam.put("username", username);
+        //jsonParam.put("password", password);
+        //StringEntity entity = new StringEntity(jsonParam.toString(),"utf-8");//解决中文乱码问题    
+        
         entity.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE,"application/json"));
         entity.setContentType("text/json");
         post.setEntity(entity);
