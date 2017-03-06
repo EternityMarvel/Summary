@@ -1,0 +1,68 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd" >
+<struts>
+    <!-- include节点是struts2中组件化的方式 可以将每个功能模块独立到一个xml配置文件中 然后用include节点引用 -->
+    <!--<include file="struts-default.xml" />-->
+
+    <!-- 模式为开发模式，修改xml配置文件会自动加载，项目交付的时候设置为false,以免影响性能 -->
+    <!--<constant name="struts.devMode" value="true" />-->
+    <!--<constant name="struts.configuration.xml.reload" value="true" />-->
+    
+    <!--所有在struts.properties文件中定义的属性，都可以配置在struts.xml文件中-->
+    <!-- 字符集编码 -->
+    <constant name="struts.i18n.encoding" value="utf-8" />
+    <constant name="struts.action.extension" value="do,action,*,"></constant>
+    <!-- 配置struts2的常量,指定Struts的工厂类,托管给Spring,默认为spring -->
+    <constant name="struts.objectFactory" value="spring" />
+
+    <!-- package提供了将多个Action组织为一个模块的方式
+     package的名字必须是唯一的
+     package可以扩展 当一个package扩展自另一个package时该package会在本身配置的基础上加入扩展的package的配置 父package必须在子package前配置
+        name：package名称
+        extends:继承的父package名称
+        abstract:设置package的属性为抽象的 抽象的package不能定义action 值true:false
+        namespace:定义package命名空间 该命名空间影响到url的地址，例如此命名空间为/user那么访问是的地址为http://localhost:8080/struts2/user/XX.action
+    -->
+
+    <package name="UserPackage" namespace="/user" extends="struts-default">
+        <!--可以定义拦截器-->
+        <!--<interceptors>-->
+            <!--<interceptor name="userInterceptor" class="类路径" />-->
+            <!--拦截器栈-->
+            <!--<interceptor-stack name="myStack">-->
+                <!--<interceptor-ref name="userInterceptor" />-->
+            <!--</interceptor-stack>-->
+        <!--</interceptors>-->
+
+        <!-- 定义默认的拦截器 每个Action都会自动引用 如果Action中引用了其它的拦截器 默认的拦截器将无效 -->
+        <!--<default-interceptor-ref name="myStack"></default-interceptor-ref>-->
+
+        <!--配置全局页面,在这个package里可以共用的结果集,每个action中都可以使用这个result -->
+        <!--<global-results>-->
+            <!--<result name="mainPage">/main.jsp</result>-->
+        <!--</global-results>-->
+
+        <!-- Action配置 一个Action可以被多次映射(只要action配置中的name不同)
+             name：action名称
+             class: 对应的类的路径
+             method: 调用Action中的方法名
+        -->
+
+        <action name="save" class="com.menghao.ssh.action.UserAction" method="save">
+            <!-- 引用拦截器
+                name:拦截器名称或拦截器栈名称
+             -->
+            <!--<interceptor-ref name="userInterceptor" />-->
+
+            <!-- 节点配置
+                name : result名称 和Action中返回的值相同 默认为success
+                type : result类型 默认为dispatcher
+             -->
+            <result name="success" type="dispatcher">/WEB-INF/index.jsp</result>
+
+            <!-- 属性设置
+             name：对应Action中的get/set方法
+             -->
+            <!--<param name="url">http://www.sina.com</param>-->
+        </action>
+    </package>
+</struts>
