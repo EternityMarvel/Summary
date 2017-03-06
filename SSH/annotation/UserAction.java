@@ -16,12 +16,19 @@ import com.menghao.ssh.service.UserService;
  * @Date: 2017/3/6 14:50
  * @Author: Mr.m
  */
-@Results( { @Result(name="success",location="/success.jsp"),
-        @Result(name="failure",location="/failure.jsp") }) 
-public class UserAction extends ActionSupport {
+@Results( { @Result(name="success",location="/WEB-INF/success.jsp"),
+        @Result(name="failure",location="/WEB-INF//failure.jsp") }) 
+public class UserAction extends ActionSupport implements ServletRequestAware, ServletResponseAware, ServletContextAware{
     @Resource
     private UserService userService;
+  
     private User user;
+    //通过实现特定的接口,struts会将request等注入进来
+    private HttpServletRequest request;
+
+    private ServletContext servletContext;
+
+    private HttpServletResponse response;
     
     @Action(value="save")
     public String addUser() {
@@ -41,6 +48,16 @@ public class UserAction extends ActionSupport {
     public void setUser(User user) {
         this.user = user;
     }
-    
+    public void setServletRequest(HttpServletRequest req) {
+        this.request = req;
+    }
+
+    public void setServletResponse(HttpServletResponse res) {
+        this.response = res;
+    }
+
+    public void setServletContext(ServletContext ser) {
+        this.servletContext = ser;
+    }
     
 }
