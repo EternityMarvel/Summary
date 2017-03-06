@@ -1,0 +1,29 @@
+<!-- XML文件的声明 -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- hibernate DTD文件的声明 -->
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <!--
+    对象关系映射的开始：
+    class元素表示类和数据库中的表的映射关系。
+    name:持久化类（或者接口）的Java全限定名；
+    table:映射的对应的数据库表名
+   -->
+	<class name="com.menghao.entity.User" table="t_user">
+     <!-- Hibernate中使用对象标识符(OID)来惟一标识一个对象 -->
+     <!--
+        持久化类对象的对象标识符(OID)和表的主键的映射关联：
+        name属性指定类中作为OID的属性名；
+        column属性表中主键字段的名字；
+        type属性指定Hibernate的映射类型
+      -->
+		<id name="id" column="id" type="int">
+      <!-- 指定对象标识符生成器：class属性指定生成器的类别名 -->
+			<generator class="native" />
+		</id>
+		<property name="username" column="username" type="string"></property>
+		<property name="password" column="password" type="string"></property>
+	</class>
+</hibernate-mapping>
