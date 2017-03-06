@@ -1,3 +1,5 @@
+package com.menghao.ssh.action;
+
 import javax.annotation.Resource;
 
 import org.apache.struts2.convention.annotation.Action;
@@ -11,7 +13,7 @@ import com.menghao.ssh.service.UserService;
 
 /**
  * @Description:
- * @Date: 2017/3/6 15:04
+ * @Date: 2017/3/6 14:50
  * @Author: Mr.m
  */
 @Results( { @Result(name="success",location="/success.jsp"),
