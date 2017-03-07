@@ -17,7 +17,15 @@
     <!--扫描Mapper,Service-->
     <context:component-scan base-package="com.menghao.ssh"/>
 
-    <!-- 激活自动代理功能 -->
+    <!--
+        proxy-target-class配置为true,强制使用Cglib代理
+        Cglib被Spring内置在core包内,默认首选Cglib代理
+    -->
     <aop:aspectj-autoproxy />
 
+    <!--
+       被代理类如果没有实现接口,该配置会出错
+       猜测：仅使用JDK动态代理
+     -->
+    <bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" />
 </beans>
