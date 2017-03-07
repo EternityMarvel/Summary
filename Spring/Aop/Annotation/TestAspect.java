@@ -31,8 +31,8 @@ public class TestAspect {
         System.out.println("method:"+point.getTarget().getClass().getName()+"."+point.getSignature().getName()+"after");
     }
 
-    @Around("pointCutMethod()")
     //环绕通知
+    @Around("pointCutMethod()")
     public void doAround(ProceedingJoinPoint pPoint) throws Throwable {
         long time = System.currentTimeMillis();
         //执行顺序—>2
